@@ -74,7 +74,7 @@ $(document).ready(function () {
         {
             question: "What is the most populated country in Africa?",
             choices: ["South Africa", "Ghana", "Ethiopia", "Nigeria"],
-            correctChoice: "Ethiopia"
+            correctChoice: "Nigeria"
         },
         {
             question: "In what country is Transylvania located?",
@@ -153,6 +153,7 @@ $(document).ready(function () {
     var randomAnswer = [0, 1, 2, 3];
     var correctAnswer;
     var userGuess;
+    var timedOut = 0;
 
     // function shuffle(randomAnswer) {
     //     for (var j, x, i = randomAnswer.length; i; j = parseInt(Math.random() * i), x = randomAnswer[--i], randomAnswer[i] = randomAnswer[j], randomAnswer[j] = x);
@@ -163,15 +164,22 @@ $(document).ready(function () {
 
     console.log('array length: ' + questionArray.length);
 
+    //listenting for button click to hide instructions and display first question
+    $('#start').on('click', gameStart);
+    function gameStart() {
+        $('#instructions').css('display', 'none');
+        showQuestion();
+    }
 
+ 
     function showQuestion() {
-
+        //clears last question, answers, and timer
         $('#question').empty();
         $('#answers').empty();
-
         $('#timer').html('10 seconds left');
         time = 10;
         timer();
+
         //show random question from array
         randomNumber = Math.floor(Math.random() * (questionArray.length + 1));
         $('#question').append(questionArray[randomNumber].question);
@@ -186,38 +194,30 @@ $(document).ready(function () {
             for (var j, x, i = randomAnswer.length; i; j = parseInt(Math.random() * i), x = randomAnswer[--i], randomAnswer[i] = randomAnswer[j], randomAnswer[j] = x);
             return randomAnswer;
         };
-
         randomAnswer = shuffle(randomAnswer);
         console.log(randomAnswer);
-
         for (var i = 0; i < randomAnswer.length; i++) {
             $('#answers').prepend('<button>' + questionArray[randomNumber].choices[randomAnswer[i]] + '</button>');
-
         };
+
+        //waits for button click to check answer
         $('button').one('click', checkAnswer);
 
         //removes question asked from array
         questionArray.splice(randomNumber, 1);
 
-        questionCounter++;
-        console.log('questions asked: ' + questionCounter);
 
-        
     };
 
 
-    //  questionArray.splice(randomNumber, 1);
-    //  console.log(questionArray);
-
     function checkAnswer() {
-      //  $('#answers').css("display", "none");
+        // adds identifier to button clicked
         $(this).addClass('clicked');
-        $('button').unbind('click');
         userGuess = $('.clicked').text();
         $('#timer').html('');
-        //console.log($(this).text());
+        questionCounter++;
+        console.log('questions answered: ' + questionCounter);
         console.log(userGuess);
-        //  console.log(userGuess);
         if (userGuess === correctAnswer) {
             clearInterval(clock);
             $('#answers').html(userGuess + ' is correct!');
@@ -233,7 +233,7 @@ $(document).ready(function () {
 
         $(this).removeClass('clicked');
 
-        setTimeout(showQuestion, 4000);
+        setTimeout(questionsAsked, 4000);
 
     };
 
@@ -245,26 +245,42 @@ $(document).ready(function () {
                 clearInterval(clock);
                 userTimeout();
                 $('#timer').html('');
-                
+
             }
             if (time > 0) {
                 time--;
                 $('#timer').html(time + ' seconds left');
             }
-            
+
         }
     };
 
     function userTimeout() {
-        $('#answers').html("Time's up. The answer was " + correctAnswer + ".");        
-        setTimeout(showQuestion, 4000);
+        $('#answers').html("Time's up. The answer was " + correctAnswer + ".");
+        timedOut++;
+        questionCounter++;
+        console.log('questions asked: ' + questionCounter);
+        setTimeout(questionsAsked, 4000);
+
+
     }
 
-    showQuestion();
+    function totalScore() {
+        $('#questions-container').empty();
+        $('#questions-container').html('correct answers: ' + correctAnswers + ', wrong answers: ' + incorrectAnswers + 'unanswered questions: ' + timeOut);
+    };
+
+    function questionsAsked() {
+        if (questionCounter < 10) {
+            showQuestion();
+        };
+        if (questionCounter >= 10) {
+            totalScore();
+        }
+    };
 
 
     console.log(questionArray);
-    // $('#questions').append();
 
 
     //end document ready

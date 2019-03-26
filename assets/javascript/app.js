@@ -148,7 +148,7 @@ $(document).ready(function () {
     var questionCounter = 0;
     var correctAnswers = 0;
     var incorrectAnswers = 0;
-    var time = 15;
+    var time = 10;
     var randomNumber;;
     var randomAnswer = [0, 1, 2, 3];
     var correctAnswer;
@@ -165,7 +165,13 @@ $(document).ready(function () {
 
 
     function showQuestion() {
-           
+
+        $('#question').empty();
+        $('#answers').empty();
+
+        $('#timer').html('10 seconds left');
+        time = 10;
+        timer();
         //show random question from array
         randomNumber = Math.floor(Math.random() * (questionArray.length + 1));
         $('#question').append(questionArray[randomNumber].question);
@@ -185,44 +191,79 @@ $(document).ready(function () {
         console.log(randomAnswer);
 
         for (var i = 0; i < randomAnswer.length; i++) {
-            $('#answers').append('<button>' + questionArray[randomNumber].choices[randomAnswer[i]] + '</button>');
-    
+            $('#answers').prepend('<button>' + questionArray[randomNumber].choices[randomAnswer[i]] + '</button>');
+
         };
         $('button').one('click', checkAnswer);
+
+        //removes question asked from array
+        questionArray.splice(randomNumber, 1);
+
+        questionCounter++;
+        console.log('questions asked: ' + questionCounter);
+
+        
     };
 
-    
-    
 
-
-    questionArray.splice(randomNumber, 1);
-    console.log(questionArray);
+    //  questionArray.splice(randomNumber, 1);
+    //  console.log(questionArray);
 
     function checkAnswer() {
-        $('#answers').css("display", "none");
+      //  $('#answers').css("display", "none");
         $(this).addClass('clicked');
         $('button').unbind('click');
         userGuess = $('.clicked').text();
+        $('#timer').html('');
         //console.log($(this).text());
         console.log(userGuess);
         //  console.log(userGuess);
         if (userGuess === correctAnswer) {
-            //	clearInterval(clock);
-            console.log(userGuess + ' is right!');
+            clearInterval(clock);
+            $('#answers').html(userGuess + ' is correct!');
             correctAnswers++;
+
         }
         else if (userGuess !== correctAnswer) {
-            //	clearInterval(clock);
-            console.log(userGuess + ' is wrong!');
+            clearInterval(clock);
+            $('#answers').html('Sorry, ' + userGuess + ' is not the right answer.<br><br>The correct answer is ' + correctAnswer + '.');
             incorrectAnswers++;
         }
         console.log('correct answers: ' + correctAnswers + ', wrong answers: ' + incorrectAnswers);
 
         $(this).removeClass('clicked');
-        
+
+        setTimeout(showQuestion, 4000);
+
     };
 
+    function timer() {
+        $('#timer').html('10 seconds left');
+        clock = setInterval(countDown, 1000);
+        function countDown() {
+            if (time < 1) {
+                clearInterval(clock);
+                userTimeout();
+                $('#timer').html('');
+                
+            }
+            if (time > 0) {
+                time--;
+                $('#timer').html(time + ' seconds left');
+            }
+            
+        }
+    };
+
+    function userTimeout() {
+        $('#answers').html("Time's up. The answer was " + correctAnswer + ".");        
+        setTimeout(showQuestion, 4000);
+    }
+
     showQuestion();
+
+
+    console.log(questionArray);
     // $('#questions').append();
 
 

@@ -1,0 +1,107 @@
+#bg {
+    align-items: center;
+    /* background: url('https://picsum.photos/1920/1080/?random'); */
+    background-color: black;
+    background-repeat: no-repeat;
+    background-position: top center;
+    height:100vh;
+    z-index:1;
+}
+
+.wrapper {
+    position: absolute;
+}
+
+#overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: black; opacity: 0; z-index: 2;}
+
+h1 {
+    font-size: 40pt;
+    margin-bottom: 5%;
+    font-weight: bolder;
+    letter-spacing: 4px;
+}
+
+
+#page {
+    background-color: rgba(0, 0, 0, 0.616);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+}
+
+#game-container {
+    width: 50%;
+    height: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 99;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+    text-align: center;    
+    align-items: center;
+    font-family: 'Open Sans Condensed', sans-serif;
+    letter-spacing: 1px;
+}
+
+#instructions {
+    margin-top: 40px;
+    line-height: 40px;
+    font-size: 18pt;
+}
+
+#question {
+    margin-top: 10px;
+    font-size: 20pt;
+}
+
+#answers {
+    margin-top: 20px;
+    width: 80%;
+    line-height: 30px;
+    font-size: 16pt;
+}
+
+button {
+    margin: 10px;
+    background-color: rgba(255, 255, 255, 0.164);
+    padding: 15px 0px 15px 0px;
+    border: #e2e2e2 solid 1px;
+    border-radius: 10px;
+    width: 100%;
+    font-size: 18pt;
+    letter-spacing: 1px;
+    font-family: 'Open Sans Condensed', sans-serif;
+    
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.288);
+}
+
+button:active {
+    background-color: rgba(194, 194, 194, 0.671);
+    outline: 0;
+}
+
+
+
+#timer {
+    margin-top: 20px;
+    font-size: 16pt;
+    letter-spacing: 3px;
+    word-spacing: 10px;
+}
+
+* {
+    color: #e2e2e2;
+}
+
+#start {
+    margin-top: 40px;
+}

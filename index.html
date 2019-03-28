@@ -1,41 +1,52 @@
 <!DOCTYPE html>
 
 <head>
-    <link rel="shortcut icon" type="image/png" href="assets/images/mario.png" />
+    <link rel="shortcut icon" type="image/png" href="assets/images/favicon.ico" />
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link href="https://fonts.googleapis.com/css?family=Catamaran|Open+Sans+Condensed:300" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <title>World Geography Trivia</title>
 
 </head>
 
-<body>
+<body background="https://picsum.photos/1920/1080/?random" id="bg">
 
-    <header>
 
-        <h1>World Geography Trivia</h1>
+        <div id="overlay"></div>
 
-        <div id="instructions">
-            <h3>Test your Geography Knowledge</h3>
-            <p>10 questions to answer. 10 seconds each.</p>
-            <h3>Good Luck!</h3>
-            <button id="start">Click to Begin</button>
+        <div id="page">
+
+            <div id="game-container" class="flex">
+                <header>
+
+                    <h1>World Geography Trivia</h1>
+
+                    <div id="instructions">
+                        <h3>Test your Geography Knowledge</h3>
+                        <p>10 questions to answer. 15 seconds each.</p>
+                        <h3>Good Luck!</h3>
+                        <button id="start">Click to Begin</button>
+                    </div>
+
+                </header>
+
+
+
+                <div id="questions-container" class="flex">
+
+                    <div id="question"></div>
+                    <div id="answers"></div>
+
+                </div>
+
+
+                <div id="total-score"></div>
+
+                <!-- close game-container -->
+            </div>
+
+            <!-- close page -->
         </div>
-
-    </header>
-
-    <div id="game-container">
-<div id="questions-container">
-    <div id="question"></div>
-    <div id="answers"></div>
-    <div id="timer"></div>
-    
-
-    <div id="reveal"></div>
-</div>
-
-<div id="total-score"></div>
-
-
-    </div>
 
 
 

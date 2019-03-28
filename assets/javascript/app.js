@@ -319,6 +319,11 @@ $(document).ready(function () {
                 time--;
                 $('#timer').html('<p>' + time + ' seconds left</p>');
             }
+
+            if (time === 1) {
+                $('#timer').html('<p>' + time + ' second left</p>');
+            }
+
         }
     };
 

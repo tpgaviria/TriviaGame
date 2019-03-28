@@ -236,6 +236,7 @@ $(document).ready(function () {
         // click event listener
         $('button').one('click', checkAnswer);
 
+
     };
 
 
@@ -368,7 +369,7 @@ $(document).ready(function () {
 
         // if questions asked is less than 10, ask another
         if (questionCounter < 10) {
-            showQuestion());
+            setTimeout(showQuestion,500);
         };
 
         // if questions asked is ten, end game and display total

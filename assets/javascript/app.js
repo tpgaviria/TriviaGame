@@ -4,8 +4,6 @@ $(document).ready(function () {
 
     var questionArray = [];
 
-
-
     var backgroundArray = [];
 
     for (var i = 0; i < 20; i++) {
@@ -20,8 +18,6 @@ $(document).ready(function () {
         var imgSrc = backgroundArray[Math.floor(Math.random() * backgroundArray.length)];
 
         document.body.style.backgroundImage = 'url(' + imgSrc + ')';
-
-
     }
 
     console.log($(this));
@@ -30,6 +26,7 @@ $(document).ready(function () {
 
     // global variables
     var questionCounter = 0;
+    var questionsNum = 0;
     var correctAnswers = 0;
     var incorrectAnswers = 0;
     var time = 15;
@@ -47,6 +44,8 @@ $(document).ready(function () {
     // $('button').on('click', changeBackground);
     $('#start').on('click', function() {$('#overlay').animate({ opacity: 1,}, 500);});
     $('#start').on('click', gameStart);
+
+
 
 
 
@@ -194,6 +193,7 @@ $(document).ready(function () {
     function showQuestion() {
 
         
+        questionsNum++;
 
         //clears last question, answers, and timer
         $('#question').empty();
@@ -236,6 +236,7 @@ $(document).ready(function () {
         // click event listener
         $('button').one('click', checkAnswer);
 
+        
 
     };
 
@@ -297,6 +298,7 @@ $(document).ready(function () {
 
     // creates timer
     function timer() {
+        $('#question-count').html('<p>' + questionsNum + ' / 10</p>');
         $('#answers').append('<div id="timer"></div>')
         // displays ten seconds left to start
         $('#timer').html('<p>15 seconds left</p>');
@@ -310,6 +312,7 @@ $(document).ready(function () {
                 clearInterval(clock);
                 userTimeout();
                 $('#timer').html('');
+                $('#question-count').html('');
             };
             // if there is still time left, decrease time by one second
             if (time > 0) {
@@ -318,6 +321,11 @@ $(document).ready(function () {
             }
         }
     };
+
+
+
+
+    
 
 
 
@@ -346,7 +354,7 @@ $(document).ready(function () {
     // at game end, display stats
     function totalScore() {
 
-        $('#question').html('correct answers: ' + correctAnswers + ', wrong answers: ' + incorrectAnswers + 'unanswered questions: ' + timedOut);
+        $('#question').html('<p>Final Stats</p><hr><p>correct answers: ' + correctAnswers + '</p><p> wrong answers: ' + incorrectAnswers + '</p><p>unanswered questions: ' + timedOut + '</p>');
         $('#answers').html('');
 
         // creates button for restart
@@ -359,6 +367,7 @@ $(document).ready(function () {
         incorrectAnswers = 0;
         correctAnswers = 0;
         timedOut = 0;
+        questionsNum = 0;
 
     };
 

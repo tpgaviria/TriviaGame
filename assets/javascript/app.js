@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    
+
 
     var questionArray = [];
 
@@ -8,20 +8,20 @@ $(document).ready(function () {
 
     for (var i = 0; i < 20; i++) {
         randomBackground = Math.floor(Math.random() * (2000));
-        backgroundArray.push('https://picsum.photos/1920/1080/?' + randomBackground);
+        var bgHeight = window.innerHeight;
+        var bgWidth = window.innerWidth;
+        backgroundArray.push('https://picsum.photos/' + bgHeight + '/' + bgWidth + '/?' + randomBackground);
     }
 
     function changeBackground() {
 
         // $('#overlay').animate({ opacity: 1, }, 3000);
-        $('#overlay').animate({ opacity: 0,}, 2000);
+        $('#overlay').animate({ opacity: 0, }, 2000);
         var imgSrc = backgroundArray[Math.floor(Math.random() * backgroundArray.length)];
 
         document.body.style.backgroundImage = 'url(' + imgSrc + ')';
     }
 
-    console.log($(this));
-    console.log(backgroundArray);
 
 
     // global variables
@@ -41,8 +41,8 @@ $(document).ready(function () {
 
 
     //listenting for button click to hide instructions and display first question
-    // $('button').on('click', changeBackground);
-    $('#start').on('click', function() {$('#overlay').animate({ opacity: 1,}, 500);});
+
+    $('#start').on('click', function () { $('#overlay').animate({ opacity: 1, }, 500); });
     $('#start').on('click', gameStart);
 
 
@@ -50,8 +50,8 @@ $(document).ready(function () {
 
 
 
-    function gameStart() {        
-        
+    function gameStart() {
+
 
         setTimeout(changeBackground, 500);
 
@@ -184,7 +184,7 @@ $(document).ready(function () {
             },
         ];
 
-        setTimeout(showQuestion,1000);
+        setTimeout(showQuestion, 1000);
     }
 
 
@@ -192,7 +192,7 @@ $(document).ready(function () {
 
     function showQuestion() {
 
-        
+
         questionsNum++;
 
         //clears last question, answers, and timer
@@ -210,14 +210,6 @@ $(document).ready(function () {
         // assigns correct answer to variable
         correctAnswer = questionArray[randomNumber].correctChoice;
 
-        //console.log tests
-        console.log('array length: ' + questionArray.length);
-        console.log(questionArray);
-        console.log('random number: ' + randomNumber);
-        console.log('Question: ' + questionArray[randomNumber].question);
-        console.log('choices: ' + questionArray[randomNumber].choices);
-        console.log('correct answer: ' + correctAnswer);
-        console.log('--------------------------')
 
         //function to randomize array of answer indexes
         function shuffle(randomAnswer) {
@@ -226,7 +218,6 @@ $(document).ready(function () {
         };
         // applies function to index array
         randomAnswer = shuffle(randomAnswer);
-        console.log(randomAnswer);
 
         // creates button for each answer
         for (var i = 0; i < randomAnswer.length; i++) {
@@ -236,7 +227,7 @@ $(document).ready(function () {
         // click event listener
         $('button').one('click', checkAnswer);
 
-        
+
 
     };
 
@@ -258,8 +249,6 @@ $(document).ready(function () {
 
         // keeps track of how many questions completed
         questionCounter++;
-        console.log('questions answered: ' + questionCounter);
-        console.log(userGuess);
 
         //if answer is correct, display that it was right
         if (userGuess === correctAnswer) {
@@ -285,10 +274,10 @@ $(document).ready(function () {
 
         //removes question asked from array to avoid repitition
         questionArray.splice(randomNumber, 1);
-        
+
         $('#overlay').animate({ opacity: 1, }, 1000);
-        
-        setTimeout(changeBackground,1000);
+
+        setTimeout(changeBackground, 1000);
 
     };
 
@@ -330,7 +319,7 @@ $(document).ready(function () {
 
 
 
-    
+
 
 
 
@@ -348,8 +337,8 @@ $(document).ready(function () {
         questionArray.splice(randomNumber, 1);
 
         $('#overlay').animate({ opacity: 1, }, 1500);
-        
-        setTimeout(changeBackground,1000);
+
+        setTimeout(changeBackground, 1000);
 
     };
 
@@ -383,15 +372,15 @@ $(document).ready(function () {
 
         // if questions asked is less than 10, ask another
         if (questionCounter < 10) {
-            setTimeout(showQuestion,500);
+            setTimeout(showQuestion, 500);
         };
 
         // if questions asked is ten, end game and display total
         if (questionCounter >= 10) {
-            setTimeout(totalScore,500);
+            setTimeout(totalScore, 500);
         }
 
-        
+
 
     };
 

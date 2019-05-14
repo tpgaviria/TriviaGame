@@ -6,7 +6,7 @@ body {
     background-color: black;
     background: url(https://picsum.photos/1920/1080/?random);
     background-repeat: no-repeat;
-    background-size: auto 100%;
+    background-size: auto 120%;
     z-index:1;
 }
 
@@ -14,10 +14,10 @@ body {
     position: absolute;
 }
 
-#overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: black; opacity: 0; z-index: 2;}
+#overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100vh; background: black; opacity: 0; z-index: 2;}
 
 h1 {
-    font-size: 40pt;
+    font-size: 3em;
     margin-bottom: 15px;
     font-weight: bolder;
     /* letter-spacing: 4px; */
@@ -49,19 +49,19 @@ h1 {
     background-color: rgba(0, 0, 0, 0.616);
     display: flex;
     flex-direction: column;
-    justify-content: center;
     position: absolute;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     z-index: 99;
 }
 
 #game-container {
     width: 50%;
-    height: 60%;
+    height: 40vh;
     margin-left: auto;
     margin-right: auto;
     z-index: 99;
+    margin-top: 15vh;
 }
 
 .flex {
@@ -80,16 +80,16 @@ h1 {
 }
 
 #question {
-    margin-top: 10px;
+    margin-top: 5%;
     font-size: 20pt;
-    line-height: 50px;
+    line-height: 95%;
 }
 
 #answers {
-    margin-top: 20px;
+    margin-top: 2%;
     width: 80%;
-    line-height: 30px;
-    font-size: 16pt;
+    line-height: 1em;
+    font-size: 1em;
 }
 
 #question-count {
@@ -99,7 +99,7 @@ h1 {
 button {
     margin: 10px;
     background-color: rgba(255, 255, 255, 0.164);
-    padding: 15px 0px 15px 0px;
+    padding: 5px 0px 5px 0px;
     border: #e2e2e2 solid 1px;
     border-radius: 10px;
     width: 100%;
